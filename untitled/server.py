@@ -1,6 +1,3 @@
-import socket
-from threading import Thread
-from Queue import Queue
 from SocketServer import (StreamRequestHandler, TCPServer, ThreadingMixIn)
 
 
@@ -75,8 +72,9 @@ class RequestHandler(StreamRequestHandler):
 
 
 # Instead of setting the world directly, I should probably use thread-safe
-# queues to mutate the world state. This would allow me to not only have clients
-# send in events - but I could run a thread to send in world "tick" events, too.
+# queues to mutate the world state. This would allow me to not only have
+# clients send in events - but I could run a thread to send in world "tick"
+# events, too.
 class Server(ThreadingMixIn, TCPServer):
     def set_world(self, world):
         self.world = world
@@ -87,9 +85,9 @@ if __name__ == "__main__":
 
     world = World()
 
-    # At some point I will need to update the world and broadcast entity changes
-    # to all of the clients. This broadcast doesn't need to be done in the
-    # normal command sequence.
+    # At some point I will need to update the world and broadcast entity
+    # changes to all of the clients. This broadcast doesn't need to be done in
+    # the normal command sequence.
     #
     # world.update()
 
